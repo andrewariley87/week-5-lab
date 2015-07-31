@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Posts</h1>
+
+
+
+    <% @upvoteorder.each do |post| %>
+        <p><%= link_to post.title, voteandfetch_post_path(:id => post.id) %></p>
+        <p><%= post.summary %></p>
+        <p><%= pluralize(post.votes.count, "vote")%></p>
+        <p><%= button_to 'Like', upvote_post_path(post), method: :post%></p>
+        <p><%= button_to 'Dislike', downvote_post_path(post), method: :post%></p>
+        <% end %>
+
+
+<br>
+
+<%= link_to 'New Post', new_post_path %>
