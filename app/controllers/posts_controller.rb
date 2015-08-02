@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
-    @upvoteorder = @posts.sort_by {|post| post.votes.count}.reverse
+    @upvoteorder = @posts.sort_by {|post| post.votes.count - post.downvotes.count}.reverse
   end
 
   # GET /posts/1
@@ -69,7 +69,7 @@ class PostsController < ApplicationController
 
   def downvote
     @post = Post.find(params[:id])
-    @post.votes.first.destroy
+    @post.downvotes.create
     redirect_to(posts_path)
   end
 

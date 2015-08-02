@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
 
   has_many :votes
+  has_many :downvotes
   validate :website_has_correct_format
 
 

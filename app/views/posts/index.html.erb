@@ -7,7 +7,7 @@
     <% @upvoteorder.each do |post| %>
         <p><%= link_to post.title, voteandfetch_post_path(:id => post.id) %></p>
         <p><%= post.summary %></p>
-        <p><%= pluralize(post.votes.count, "vote")%></p>
+        <p><%= pluralize(post.votes.count - post.downvotes.count, "vote")%></p>
         <p><%= button_to 'Like', upvote_post_path(post), method: :post%></p>
         <p><%= button_to 'Dislike', downvote_post_path(post), method: :post%></p>
         <% end %>
