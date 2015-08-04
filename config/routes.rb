@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :views
+  devise_for :users
   resources :posts do
     member do
       post 'upvote'

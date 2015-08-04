@@ -3,8 +3,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
-    @upvoteorder = @posts.sort_by {|post| post.votes.count - post.downvotes.count}.reverse
+    @upvoteorder = Post.all.sort_by {|post| post.votes.count - post.downvotes.count}.reverse
   end
 
   # GET /posts/1
@@ -31,8 +30,12 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        if @post.errors[:unique_url]
+          format.html { redirect_to(posts_path) }
+        else
+          format.html { render :new }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -76,7 +79,6 @@ class PostsController < ApplicationController
   def voteandfetch
     @post = Post.find(params[:id])
     @post.votes.create
-    # redirect_to(posts_path)
     redirect_to(@post.post_url)
   end
 
