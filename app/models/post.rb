@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
   end
 
   def check_url
-    post = Post.where("post_url = ? and id != ?", post_url, id.to_s).first
+    post = Post.where("post_url = ? and id != ?", post_url, id.to_i).first
       if post
         post.votes.create
         self.errors.add(:unique_url, 'This is not a unique url, url already in use')
