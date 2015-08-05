@@ -2,9 +2,10 @@ class Post < ActiveRecord::Base
 
   has_many :votes
   has_many :downvotes
-  belongs_to :users
+  belongs_to :user
   validate :website_has_correct_format
   before_save :check_url
+  belongs_to :subreddit
 
 
   def website_has_correct_format
@@ -12,7 +13,7 @@ class Post < ActiveRecord::Base
   end
 
   def check_url
-    post = Post.where(:post_url => self.post_url).first
+    post = Post.where("post_url = ? and id != ?", post_url, id.to_s).first
       if post
         post.votes.create
         self.errors.add(:unique_url, 'This is not a unique url, url already in use')
