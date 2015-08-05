@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :subreddit_select, only: [:new, :edit, :update, :create]
   # GET /posts
   # GET /posts.json
   def index
@@ -87,6 +88,10 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+    end
+
+    def subreddit_select
+      @subreddit_options = Subreddit.all.collect{ |subreddit| [subreddit.name, subreddit.id] }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
