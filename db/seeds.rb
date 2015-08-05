@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(:user_name => 'Andy')
+User.create!(:user_name => 'Andy', :email => 'aar00734@aol.com', :password => 'pacers31')
 
-Post.create(:title => "First Post", :summary => "This is the first post", :post_url => "http://google.com", :user_id => 1)
-Post.create(:title => 'Second Post', :summary => 'This is the second post', :post_url => 'http://espn.com', :user_id => 1)
-Post.create(:title => 'Third Post', :summary => 'This is the third post', :post_url => 'http://nbc.com', :user_id => 1)
+Post.create!(:title => "First Post", :summary => "This is the first post", :post_url => "http://google.com", :user_id => 1)
+Post.create!(:title => 'Second Post', :summary => 'This is the second post', :post_url => 'http://espn.com', :user_id => 1)
+Post.create!(:title => 'Third Post', :summary => 'This is the third post', :post_url => 'http://nbc.com', :user_id => 1)

@@ -6,7 +6,7 @@
 
     <% @upvoteorder.each do |post| %>
         <p><%= link_to post.title, voteandfetch_post_path(:id => post.id) %></p>
-        <p><%= post.summary %></p>
+        <p><%= post.summary %> by <%= post.user.user_name %></p>
         <p><%= pluralize(post.votes.count - post.downvotes.count, "vote")%></p>
         <% if user_signed_in? %>
         <p><%= button_to 'Like', upvote_post_path(post), method: :post%></p>
