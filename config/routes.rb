@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :subreddits
   devise_for :views
   devise_for :users
   resources :posts do

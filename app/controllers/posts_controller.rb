@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :subreddit_select, only: [:new, :edit, :update, :create]
   # GET /posts
   # GET /posts.json
   def index
@@ -23,7 +24,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
@@ -89,8 +90,12 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    def subreddit_select
+      @subreddit_options = Subreddit.all.collect{ |subreddit| [subreddit.name, subreddit.id] }
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :summary, :post_url)
+      params.require(:post).permit(:title, :summary, :post_url, :user_name, :subreddit_name)
     end
 end
