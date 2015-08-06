@@ -1,0 +1,9 @@
+<div class="comment-round">
+  <div class="comment">
+    <%= simple_format(comments.body) %>
+    <%= link_to 'show comment', comment_path(comments) %>
+    <p class="comment_meta">Posted by <%= comments.user.user_name %></p>
+    <%= render :partial => "comments/form", :locals => {:commentable_object => comments} %>
+    <%= render :partial => "partials/comments", :collection => comments.comments %>
+  </div>
+</div>

@@ -1,16 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Great Posts</h1>
+<h1> Great Posts </h1>
 
 
 
     <% @upvoteorder.each do |post| %>
-        <p><%= link_to post.title, voteandfetch_post_path(:id => post.id) %></p>
-        <p><%= post.summary %> by <%= post.user.user_name %></p>
+        <p> <%= link_to post.title, voteandfetch_post_path(:id => post.id) %></p>
+        <p> <%= post.summary %> by <%= post.user.user_name %> </p>
+        <p> Subreddit: <%= link_to post.subreddit.name, subreddit_posts_path(:subreddit_id => post.subreddit.name) %> </p>
         <p><%= pluralize(post.votes.count - post.downvotes.count, "vote")%></p>
         <% if user_signed_in? %>
-        <p><%= button_to 'Like', upvote_post_path(post), method: :post%></p>
-        <p><%= button_to 'Dislike', downvote_post_path(post), method: :post%></p>
+          <p> <%= button_to 'Like', upvote_post_path(post), method: :post%></p>
+          <p> <%= button_to 'Dislike', downvote_post_path(post), method: :post%></p>
         <% else %>
         <% end %>
       <% end %>
