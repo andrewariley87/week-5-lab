@@ -7,22 +7,23 @@
     <% @upvoteorder.each do |post| %>
     <div class = "container">
       <div class = "row">
-        <div class = "col-md-2">
+        <div class = "col-xs-2">
       <% if user_signed_in? %>
         <p> <%= link_to '<i class="glyphicon glyphicon-chevron-up"></i>'.html_safe, upvote_post_path(post), method: :post%></p>
         <p><%= post.votes.count - post.downvotes.count %></p>
         <p> <%= link_to '<i class="glyphicon glyphicon-chevron-down"></i>'.html_safe, downvote_post_path(post), method: :post%></p>
         <% end %>
       </div>
-      <div class = "col-md-10">
+      <div class = "col-xs-10">
         <p> <%= link_to post.title, voteandfetch_post_path(:id => post.id) %></p>
         <p> <%= post.summary %> by <%= post.user.user_name %> </p>
         <p> Subreddit: <%= link_to post.subreddit.name, subreddit_posts_path(:subreddit_id => post.subreddit.name) %> </p>
+      </div>
+      </div>
+      </div>
 
   <% end %>
-  </div>
-  </div>
-  </div>
+
 
 <br>
 
