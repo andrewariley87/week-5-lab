@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   validate :website_has_correct_format
   before_save :check_url
   belongs_to :subreddit
+  has_many :comments, :as => :commentable
 
 
   def website_has_correct_format
